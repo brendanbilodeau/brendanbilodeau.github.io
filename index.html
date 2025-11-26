@@ -227,7 +227,6 @@
             border-color: var(--primary-color);
         }
 
-        /* Small icon to indicate clickability */
         .card::after {
             content: '\f067'; /* FontAwesome plus icon */
             font-family: "Font Awesome 6 Free";
@@ -452,7 +451,6 @@
     <!-- Sidebar Navigation -->
     <nav class="sidebar">
         <div class="profile-header">
-            <!-- Add your photo here if you want: <img src="photo.jpg" style="width:100px;border-radius:50%;margin-bottom:10px;"> -->
             <h2>Brendan Bilodeau</h2>
             <span>Robotic Engineering Student</span>
         </div>
@@ -488,9 +486,8 @@
             <p style="margin-bottom: 25px; color: #666;">Click on a project to see detailed specifications.</p>
             <div class="card-grid">
                 
-                <!-- Project 1 -->
+                <!-- Project 1 (Capstone) -->
                 <div class="card" onclick="openModal('capstone')">
-                    <!-- <img src="project1.jpg" class="card-image" /> (Uncomment if you have images) -->
                     <div class="card-content">
                         <h3>Capstone Project</h3>
                         <div class="date">2025 · Research Firm</div>
@@ -498,7 +495,7 @@
                     </div>
                 </div>
 
-                <!-- Project 2 -->
+                <!-- Project 2 (Rubik) -->
                 <div class="card" onclick="openModal('rubik')">
                     <div class="card-content">
                         <h3>Rubik's Cube Solver</h3>
@@ -507,7 +504,7 @@
                     </div>
                 </div>
 
-                <!-- Project 3 -->
+                <!-- Project 3 (Racecar) -->
                 <div class="card" onclick="openModal('racecar')">
                     <div class="card-content">
                         <h3>Autonomous Racecar</h3>
@@ -516,7 +513,25 @@
                     </div>
                 </div>
 
-                <!-- Project 4 -->
+                <!-- NEW PROJECT 1 (Workshop Caddy) -->
+                <div class="card" onclick="openModal('caddy')">
+                    <div class="card-content">
+                        <h3>Workshop Caddy</h3>
+                        <div class="date">2023</div>
+                        <p>Mobile robot that navigates between stations to cut electrical wires and dispose of waste.</p>
+                    </div>
+                </div>
+
+                <!-- NEW PROJECT 2 (Automation Line) -->
+                <div class="card" onclick="openModal('autoline')">
+                    <div class="card-content">
+                        <h3>Automation Line</h3>
+                        <div class="date">2023</div>
+                        <p>Simulated packaging line for IKEA-style parts using industrial robots and PLCs.</p>
+                    </div>
+                </div>
+
+                <!-- Project 4 (Evolution) -->
                 <div class="card" onclick="openModal('evolution')">
                     <div class="card-content">
                         <h3>Evolution Simulator</h3>
@@ -758,6 +773,30 @@
                         <li>Used ROS 2, Linux, Arduino, and Raspberry Pi for communication and control.</li>
                         <li>Integrated Lidar and Camera sensors for environment scanning.</li>
                         <li>Performed simulation and visualization in RViz.</li>
+                    </ul>
+                `
+            },
+            'caddy': {
+                title: 'Workshop Caddy',
+                subtitle: '2023 · Academic Project',
+                body: `
+                    <ul>
+                        <li>Embedded programming with Arduino Mega.</li>
+                        <li>Integrated Line Follower and Color Detection sensors.</li>
+                        <li>Designed 3D printed components (CAD) and servo-motor actuation.</li>
+                        <li>Robot navigates between stations, cuts electrical wire, and disposes of waste.</li>
+                    </ul>
+                `
+            },
+            'autoline': {
+                title: 'Automation Line',
+                subtitle: '2023 · Academic Project',
+                body: `
+                    <ul>
+                        <li>Simulated box packaging process with IKEA-style parts.</li>
+                        <li>Programmed FANUC and Universal Robots (UR).</li>
+                        <li>Developed logic for Allen-Bradley PLC.</li>
+                        <li>Designed the User Interface (UI).</li>
                     </ul>
                 `
             },

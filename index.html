@@ -10,8 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- AJOUT DU LOGO ROBOT (Favicon) -->
-    <!-- J'ai mis un lien vers une icône de robot. Vous pouvez remplacer le lien par votre propre fichier image -->
+    <!-- Robot Logo (Favicon) -->
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
     
     <!-- Font Awesome for Icons -->
@@ -576,6 +575,16 @@
                     </div>
                 </div>
 
+                <!-- Project 7 (Underwater Robot) - NEW ADDITION -->
+                <div class="card" onclick="openModal('underwater')">
+                    <img src="sea.JPEG" alt="Underwater Robot" class="card-image" />
+                    <div class="card-content">
+                        <h3>Underwater Robot</h3>
+                        <div class="date">Academic Project</div>
+                        <p>Mechanical design of a robot utilizing pneumatic components and sensor integration.</p>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -878,6 +887,20 @@
                 `
             },
 
+            // --- NEW PROJECT: Underwater Robot ---
+            'underwater': {
+                title: 'Underwater Robot',
+                subtitle: 'Academic Project',
+                hasVideo: false,
+                body: `
+                    <ul>
+                        <li>Mostly mechanical design with integration of pneumatic components.</li>
+                        <li>Conducted research on patents and market exportation strategies.</li>
+                        <li>Analyzed and selected appropriate sensors for underwater environment.</li>
+                    </ul>
+                `
+            },
+
             // Experience
             'Conceptromec': {
                 title: 'Conceptromec inc.',
@@ -1014,9 +1037,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-

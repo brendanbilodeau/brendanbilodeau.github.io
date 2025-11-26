@@ -406,27 +406,6 @@
             display: block;
         }
 
-        /* Video Placeholder Style */
-        .video-placeholder {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            background-color: #e0e0e0;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #777;
-            font-weight: 600;
-            margin-bottom: 25px;
-            border: 2px dashed #ccc;
-        }
-        
-        .video-placeholder i {
-            font-size: 3rem;
-            margin-right: 10px;
-            color: #999;
-        }
-
         .modal-body ul {
             padding-left: 20px;
             line-height: 1.8;
@@ -765,13 +744,24 @@
                 <span id="modal-subtitle" class="modal-subtitle">Subtitle</span>
             </div>
             
-            <!-- Video Container -->
+            <!-- Local MP4 Video Container -->
             <div id="modal-video-container" style="display:none; margin-bottom: 25px;">
-                <!-- The source will be set by JavaScript dynamically -->
                 <video id="modal-video-player" width="100%" controls style="border-radius: 8px; border: 1px solid #ddd;">
                     <source id="modal-video-source" src="" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
+            </div>
+
+            <!-- YouTube Video Container (Added for Evolution Simulator) -->
+            <div id="modal-youtube-container" style="display:none; margin-bottom: 25px; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px;">
+                <iframe 
+                    id="modal-youtube-player"
+                    src="" 
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
             </div>
 
             <div id="modal-body" class="modal-body">
@@ -784,7 +774,7 @@
     <script>
         // 1. Data Object holding detailed CV info
         const contentData = {
-            // Projects (hasVideo: true)
+            // Projects
             'capstone': {
                 title: 'Capstone Project (Research Firm)',
                 subtitle: '2025 · Biological Grain Crossbreeding',
@@ -851,7 +841,9 @@
             'evolution': {
                 title: 'Evolution Simulator',
                 subtitle: '2022 · Expo-Science Finalist',
-                hasVideo: false,
+                // IMPORTANT: Replace the ID below with the actual YouTube Video ID from videoext.com or YouTube
+                // Example: if link is https://www.youtube.com/watch?v=dQw4w9WgXcQ, put 'dQw4w9WgXcQ'
+                youtubeId: 'I8OgsXNWyOM&list=LL&index=82&t=4s', 
                 body: `
                     <ul>
                         <li>Created a simulation in C# and Unity.</li>
@@ -861,7 +853,7 @@
                 `
             },
 
-            // Experience (hasVideo: false)
+            // Experience
             'conceptromec': {
                 title: 'Conceptromec inc.',
                 subtitle: '2025 · Professional Experience',
@@ -920,28 +912,46 @@
         const modalTitle = document.getElementById("modal-title");
         const modalSubtitle = document.getElementById("modal-subtitle");
         const modalBody = document.getElementById("modal-body");
+        
+        // Local Video Elements
         const modalVideoContainer = document.getElementById("modal-video-container");
         const modalVideoPlayer = document.getElementById("modal-video-player");
         const modalVideoSource = document.getElementById("modal-video-source");
 
+        // YouTube Video Elements
+        const modalYoutubeContainer = document.getElementById("modal-youtube-container");
+        const modalYoutubePlayer = document.getElementById("modal-youtube-player");
+
         function openModal(id) {
             const data = contentData[id];
             if(data) {
+                // Set Text Content
                 modalTitle.textContent = data.title;
                 modalSubtitle.textContent = data.subtitle;
                 modalBody.innerHTML = data.body;
                 
-                // Check if this project has a video file defined
-                if (data.video) {
+                // Reset Players
+                modalVideoContainer.style.display = 'none';
+                modalVideoPlayer.pause();
+                modalVideoSource.src = "";
+                
+                modalYoutubeContainer.style.display = 'none';
+                modalYoutubePlayer.src = "";
+
+                // Logic to display correct video type
+                if (data.youtubeId) {
+                    // It's a YouTube video
+                    modalYoutubeContainer.style.display = 'block';
+                    modalYoutubePlayer.src = "https://www.youtube.com/embed/" + data.youtubeId;
+                } 
+                else if (data.video) {
+                    // It's a local MP4 file
                     modalVideoContainer.style.display = 'block';
-                    modalVideoSource.src = data.video; // Set the video file
-                    modalVideoPlayer.load(); // Load the new video
-                } else {
-                    modalVideoContainer.style.display = 'none';
-                    modalVideoPlayer.pause(); // Stop any playing video
-                    modalVideoSource.src = "";
+                    modalVideoSource.src = data.video; 
+                    modalVideoPlayer.load(); 
                 }
 
+                // Show Modal
                 modal.style.display = "flex"; 
                 document.body.style.overflow = "hidden"; 
             }
@@ -950,8 +960,13 @@
         function closeModal() {
             modal.style.display = "none";
             document.body.style.overflow = "auto";
-            modalVideoPlayer.pause(); // Stop video when closing modal
-            modalVideoSource.src = ""; // Reset source
+            
+            // Stop Local Video
+            modalVideoPlayer.pause();
+            modalVideoSource.src = "";
+            
+            // Stop YouTube Video (by resetting src)
+            modalYoutubePlayer.src = "";
         }
 
         // 3. Active Link Highlight on Scroll
@@ -977,5 +992,3 @@
     </script>
 </body>
 </html>
-
-

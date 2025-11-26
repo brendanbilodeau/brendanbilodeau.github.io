@@ -162,10 +162,20 @@
         #welcome {
             height: 100vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            /* CHANGED: Use row to put text and image side by side */
+            flex-direction: row; 
+            align-items: center;
+            justify-content: space-between;
             background: linear-gradient(135deg, #ffffff 0%, #e8f5e9 100%);
-            padding-left: 80px;
+            padding-left: 60px;
+            padding-right: 60px;
+            overflow: hidden; /* Prevent image from spilling out */
+        }
+
+        .hero-text {
+            flex: 1;
+            max-width: 600px;
+            z-index: 2; /* Ensure text is above if they overlap slightly */
         }
 
         .hero-text h1 {
@@ -183,8 +193,32 @@
         .hero-text p {
             font-size: 1.2rem;
             color: var(--text-light);
-            max-width: 600px;
             margin-bottom: 30px;
+        }
+
+        /* NEW: Hero Image Styles */
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .hero-image img {
+            max-height: 85vh; /* Keep it from being too tall */
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            /* Adds a subtle shadow to the cutout - makes it pop */
+            filter: drop-shadow(0 10px 20px rgba(27, 143, 74, 0.2)); 
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
 
         .btn {
@@ -471,7 +505,21 @@
             .social-links { display: none; }
             main { margin-left: 0; }
             section { padding: 50px 20px; }
-            #welcome { padding-left: 20px; text-align: center; height: auto; min-height: 70vh; }
+            
+            /* UPDATED: Welcome section mobile styles */
+            #welcome { 
+                padding-left: 20px; 
+                padding-right: 20px;
+                text-align: center; 
+                height: auto; 
+                min-height: 90vh; 
+                flex-direction: column-reverse; /* Put image on top of text on mobile */
+                justify-content: center;
+                gap: 30px;
+            }
+            .hero-image img {
+                max-height: 40vh; /* Smaller image on mobile */
+            }
         }
     </style>
 </head>
@@ -506,6 +554,12 @@
                 <h1>Hello, I'm <br><span class="highlight">Brendan Bilodeau</span></h1>
                 <p>A Robotics Engineering Student at Université de Sherbrooke specializing in automation, PLC programming, and embedded systems.</p>
                 <a href="#academic-projects" class="btn">View My Work</a>
+            </div>
+            
+            <!-- NEW: Hero Image Container -->
+            <!-- Make sure your file is named portrait.png and has no background -->
+            <div class="hero-image">
+                <img src="portrait.png" alt="Brendan Bilodeau">
             </div>
         </section>
 
@@ -544,18 +598,8 @@
                         <p>Autonomous vehicle platform utilizing ROS 2, Lidar, and Cameras for environment scanning and control.</p>
                     </div>
                 </div>
-                
-                <!-- Project 4 (Underwater Robot) - NEW ADDITION -->
-                <div class="card" onclick="openModal('underwater')">
-                    <img src="sea.JPEG" alt="Underwater Robot" class="card-image" />
-                    <div class="card-content">
-                        <h3>Underwater Robot</h3>
-                        <div class="date">2024</div>
-                        <p>Mechanical design of a robot utilizing pneumatic components and sensor integration.</p>
-                    </div>
-                </div>
 
-                <!-- Project 5 (Workshop Caddy) -->
+                <!-- Project 4 (Workshop Caddy) -->
                 <div class="card" onclick="openModal('caddy')">
                     <img src="PUJC8091.JPEG" alt="Workshop Caddy" class="card-image" />
                     <div class="card-content">
@@ -565,7 +609,7 @@
                     </div>
                 </div>
 
-                <!-- Project 6 (Automation Line) -->
+                <!-- Project 5 (Automation Line) -->
                 <div class="card" onclick="openModal('autoline')">
                     <img src="LGNW9467.JPEG" alt="Automation Line" class="card-image" />
                     <div class="card-content">
@@ -575,7 +619,7 @@
                     </div>
                 </div>
 
-                <!-- Project 7 (Evolution) -->
+                <!-- Project 6 (Evolution) -->
                 <div class="card" onclick="openModal('evolution')">
                     <img src="evolution.JPEG" alt="Evolution Simulator" class="card-image" />
                     <div class="card-content">
@@ -584,6 +628,17 @@
                         <p>A simulation observing randomly generated individuals over time using C# and Unity.</p>
                     </div>
                 </div>
+
+                <!-- Project 7 (Underwater Robot) -->
+                <div class="card" onclick="openModal('underwater')">
+                    <img src="sea.JPEG" alt="Underwater Robot" class="card-image" />
+                    <div class="card-content">
+                        <h3>Underwater Robot</h3>
+                        <div class="date">Academic Project</div>
+                        <p>Mechanical design of a robot utilizing pneumatic components and sensor integration.</p>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -873,10 +928,7 @@
             'evolution': {
                 title: 'Evolution Simulator',
                 subtitle: '2022 · Expo-Science Finalist',
-                
-                // IMPORTANT: Replace this link with your real video link
                 link: 'https://youtu.be/I8OgsXNWyOM?si=Fyxl17pcGcg0ZTPs', 
-                
                 body: `
                     <ul>
                         <li>Created a simulation in C# and Unity.</li>
@@ -1036,4 +1088,3 @@
     </script>
 </body>
 </html>
-

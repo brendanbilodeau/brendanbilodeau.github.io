@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brendan Bilodeau – Portfolio</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #1b3f2f;
+        }
+        header {
+            background-color: #1b8f4a;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        h1, h2 { margin: 0; }
+
+        /* Layout */
+        .section {
+            padding: 50px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+        .section h2 {
+            border-left: 6px solid #1b8f4a;
+            padding-left: 12px;
+            margin-bottom: 30px;
+        }
+
+        /* Large project/experience blocks */
+        .big-block {
+            display: flex;
+            flex-direction: row;
+            gap: 25px;
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid #1b8f4a;
+            background-color: #f5fff8;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+        .big-block:hover {
+            transform: translateY(-6px);
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.15);
+        }
+        .big-block img {
+            width: 250px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            background: #d9eadf;
+        }
+        .big-block-content {
+            flex: 1;
+        }
+
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            background-color: #1b3f2f;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        a { color: #1b8f4a; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Brendan Bilodeau</h1>
+        <p>Robotics Engineering Student — Université de Sherbrooke</p>
+        <p><a href="mailto:Brendan.Bilodeau@usherbrooke.ca" style="color:white;">Brendan.Bilodeau@usherbrooke.ca</a> · (581) 678-1037</p>
+    </header>
+
+    <!-- About Me Section -->
+    <section class="section">
+        <h2>About Me</h2>
+        <p>
+            I am a passionate Robotics Engineering student with hands-on experience in industrial automation,
+            robotics programming, and embedded systems. I enjoy designing real-world robotic systems — from PLC logic
+            to mechanical design to intelligent software — and I love bringing engineering ideas to life.
+        </p>
+        <p>
+            I am particularly interested in autonomous systems, marine robotics, robotic perception, and control.
+            I also enjoy working on personal projects where I can prototype, code, and experiment with new technologies.
+        </p>
+    </section>
+
+    <!-- Professional Experience -->
+    <section class="section">
+        <h2>Professional Experience</h2>
+
+        <div class="big-block">
+            <img src="" alt="Image placeholder" />
+            <div class="big-block-content">
+                <h3>Conceptromec inc. — 2025</h3>
+                <p>
+                    Worked on industrial robotics including Allen-Bradley PLC programming, FANUC robot programming, and
+                    performance optimization of robotic cells.
+                </p>
+            </div>
+        </div>
+
+        <div class="big-block">
+            <img src="" alt="Image placeholder" />
+            <div class="big-block-content">
+                <h3>Fournier Industries inc. — 2025</h3>
+                <p>
+                    Programmed Beckhoff PLCs and FANUC robots (welding and laser), centralized data using Ignition,
+                    and developed a C# application connected to an SQL database.
+                </p>
+            </div>
+        </div>
+
+        <div class="big-block">
+            <img src="" alt="Image placeholder" />
+            <div class="big-block-content">
+                <h3>GE Bromont — 2024</h3>
+                <p>
+                    Automated file transfers between FANUC robots and databases using C#, managed GitHub repositories,
+                    and created UI components using XAML.
+                </p>
+            </div>
+        </div>
+
+        <div class="big-block">
+            <img src="" alt="Image placeholder" />
+            <div class="big-block-content">
+                <h3>Siemens Drummondville — 2023</h3>
+                <p>
+                    Improved factory efficiency through 5S/Lean methods, designed prototypes using Creo, and produced
+                    components with 3D printing.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section">
+        <h2>Projects</h2>
+
+        <div class="big-block">
+            <img src="" alt="Image placeholder" />
+            <div class="big-block-content">
+                <h3>Capstone Project — Automated Grain Storage System (2025)</h3>
+                <p>
+                    Complete mechanical, electrical, and software design of an automated storage and dispensing system
+                    using PLCs and sensors.
+                </p>
+            </div>
+        </div>
+
+        <div class="big-block">
+            <img src="" alt="Image placeholder" />
+            <div class="big-block-content">
+                <h3>Rubik's Cube Solver (2024)</h3>
+                <p>
+                    Python solving algorithm, Arduino motor control, C++, OpenCV for color detection, and a fully
+                    3D-printed structure.
+                </p>
+            </div>
+        </div>
+
+        <div class="big-block">
+            <img src="" alt="Image placeholder" />
+            <div class="big-block-content">
+                <h3>Autonomous Racecar (2024)</h3>
+                <p>
+                    Built using ROS 2, Linux, Arduino, Raspberry Pi, Lidar, camera sensors, and simulated with RViz.
+                </p>
+            </div>
+        </div>
+
+        <div class="big-block">
+            <img src="" alt="Image placeholder" />
+            <div class="big-block-content">
+                <h3>Evolution Simulator (2022)</h3>
+                <p>
+                    Simulation in Unity/C#, observing generated individuals over time. Finalist at the Expo-Science
+                    competition.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Brendan Bilodeau</p>
+    </footer>
+</body>
+</html>

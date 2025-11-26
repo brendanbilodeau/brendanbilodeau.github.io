@@ -216,7 +216,7 @@
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            cursor: pointer; /* Indicates clickable */
+            cursor: pointer;
             border: 1px solid transparent;
             position: relative;
         }
@@ -232,8 +232,8 @@
             font-family: "Font Awesome 6 Free";
             font-weight: 900;
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             background: var(--light-bg);
             color: var(--primary-color);
             width: 30px;
@@ -245,17 +245,19 @@
             font-size: 0.8rem;
             opacity: 0;
             transition: opacity 0.3s;
+            z-index: 2;
         }
 
         .card:hover::after {
             opacity: 1;
         }
 
+        /* Standardized Card Image */
         .card-image {
-            height: 180px;
-            background-color: #d9eadf; 
+            height: 200px;
             width: 100%;
             object-fit: cover;
+            background-color: #e0f2f1; /* Fallback color */
         }
 
         .card-content {
@@ -404,6 +406,27 @@
             display: block;
         }
 
+        /* Video Placeholder Style */
+        .video-placeholder {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-weight: 600;
+            margin-bottom: 25px;
+            border: 2px dashed #ccc;
+        }
+        
+        .video-placeholder i {
+            font-size: 3rem;
+            margin-right: 10px;
+            color: #999;
+        }
+
         .modal-body ul {
             padding-left: 20px;
             line-height: 1.8;
@@ -483,11 +506,12 @@
         <!-- Academic Projects -->
         <section id="academic-projects">
             <h2 class="section-title">Academic Projects</h2>
-            <p style="margin-bottom: 25px; color: #666;">Click on a project to see detailed specifications.</p>
+            <p style="margin-bottom: 25px; color: #666;">Click on a project to see detailed specifications and video.</p>
             <div class="card-grid">
                 
                 <!-- Project 1 (Capstone) -->
                 <div class="card" onclick="openModal('capstone')">
+                    <img src="MIYY8097.JPEG" alt="Capstone Project" class="card-image" />
                     <div class="card-content">
                         <h3>Capstone Project</h3>
                         <div class="date">2025 · Research Firm</div>
@@ -497,6 +521,7 @@
 
                 <!-- Project 2 (Rubik) -->
                 <div class="card" onclick="openModal('rubik')">
+                    <img src="Rubik.JPEG" alt="Rubik's Cube Solver" class="card-image" />
                     <div class="card-content">
                         <h3>Rubik's Cube Solver</h3>
                         <div class="date">2024</div>
@@ -506,6 +531,7 @@
 
                 <!-- Project 3 (Racecar) -->
                 <div class="card" onclick="openModal('racecar')">
+                    <img src="racecar.jpeg" alt="Autonomous Racecar" class="card-image" />
                     <div class="card-content">
                         <h3>Autonomous Racecar</h3>
                         <div class="date">2024</div>
@@ -513,8 +539,9 @@
                     </div>
                 </div>
 
-                <!-- NEW PROJECT 1 (Workshop Caddy) -->
+                <!-- Project 4 (Workshop Caddy) -->
                 <div class="card" onclick="openModal('caddy')">
+                    <img src="PUJC8091.JPEG" alt="Workshop Caddy" class="card-image" />
                     <div class="card-content">
                         <h3>Workshop Caddy</h3>
                         <div class="date">2023</div>
@@ -522,11 +549,9 @@
                     </div>
                 </div>
 
-                <!-- NEW PROJECT 2 (Automation Line) -->
+                <!-- Project 5 (Automation Line) -->
                 <div class="card" onclick="openModal('autoline')">
-                    <!-- Ajout de l'image ici -->
-                    <img src="LGNW9467.JPEG" alt="Équipe Automation Line" class="card-image" />
-                    
+                    <img src="LGNW9467.JPEG" alt="Automation Line" class="card-image" />
                     <div class="card-content">
                         <h3>Automation Line</h3>
                         <div class="date">2023</div>
@@ -534,8 +559,9 @@
                     </div>
                 </div>
 
-                <!-- Project 4 (Evolution) -->
+                <!-- Project 6 (Evolution) -->
                 <div class="card" onclick="openModal('evolution')">
+                    <img src="project-evolution.jpg" alt="Evolution Simulator" class="card-image" />
                     <div class="card-content">
                         <h3>Evolution Simulator</h3>
                         <div class="date">2022</div>
@@ -553,6 +579,7 @@
             <div class="card-grid">
                 
                 <div class="card" onclick="openModal('conceptromec')">
+                    <img src="exp-conceptromec.jpg" alt="Conceptromec" class="card-image" />
                     <div class="card-content">
                         <h3>Conceptromec inc.</h3>
                         <div class="date">2025</div>
@@ -561,6 +588,7 @@
                 </div>
 
                 <div class="card" onclick="openModal('fournier')">
+                    <img src="exp-fournier.jpg" alt="Fournier Industries" class="card-image" />
                     <div class="card-content">
                         <h3>Fournier Industries inc.</h3>
                         <div class="date">2025</div>
@@ -569,6 +597,7 @@
                 </div>
 
                 <div class="card" onclick="openModal('ge')">
+                    <img src="exp-ge.jpg" alt="GE Bromont" class="card-image" />
                     <div class="card-content">
                         <h3>GE Bromont</h3>
                         <div class="date">2024</div>
@@ -577,6 +606,7 @@
                 </div>
 
                 <div class="card" onclick="openModal('siemens')">
+                    <img src="exp-siemens.jpg" alt="Siemens" class="card-image" />
                     <div class="card-content">
                         <h3>Siemens Drummondville</h3>
                         <div class="date">2023</div>
@@ -734,6 +764,17 @@
                 <h2 id="modal-title">Title</h2>
                 <span id="modal-subtitle" class="modal-subtitle">Subtitle</span>
             </div>
+            
+            <!-- Video Container (Visible only for Academic Projects) -->
+            <div id="modal-video-container" style="display:none;">
+                <div class="video-placeholder">
+                   <div>
+                       <i class="fas fa-play-circle"></i><br>
+                       <span>Video Placeholder</span>
+                   </div>
+                </div>
+            </div>
+
             <div id="modal-body" class="modal-body">
                 <!-- Content injected via JS -->
             </div>
@@ -744,10 +785,11 @@
     <script>
         // 1. Data Object holding detailed CV info
         const contentData = {
-            // Projects
+            // Projects (hasVideo: true)
             'capstone': {
                 title: 'Capstone Project (Research Firm)',
                 subtitle: '2025 · Biological Grain Crossbreeding',
+                hasVideo: true,
                 body: `
                     <ul>
                         <li>Developed a Seed counter and distributor system.</li>
@@ -759,6 +801,7 @@
             'rubik': {
                 title: "Rubik's Cube Solver",
                 subtitle: '2024 · Personal Project',
+                hasVideo: true,
                 body: `
                     <ul>
                         <li>Base structure fully designed and 3D printed.</li>
@@ -771,6 +814,7 @@
             'racecar': {
                 title: 'Autonomous Racecar',
                 subtitle: '2024 · Academic Project',
+                hasVideo: true,
                 body: `
                     <ul>
                         <li>Used ROS 2, Linux, Arduino, and Raspberry Pi for communication and control.</li>
@@ -782,6 +826,7 @@
             'caddy': {
                 title: 'Workshop Caddy',
                 subtitle: '2023 · Academic Project',
+                hasVideo: true,
                 body: `
                     <ul>
                         <li>Embedded programming with Arduino Mega.</li>
@@ -794,6 +839,7 @@
             'autoline': {
                 title: 'Automation Line',
                 subtitle: '2023 · Academic Project',
+                hasVideo: true,
                 body: `
                     <ul>
                         <li>Simulated box packaging process with IKEA-style parts.</li>
@@ -806,6 +852,7 @@
             'evolution': {
                 title: 'Evolution Simulator',
                 subtitle: '2022 · Expo-Science Finalist',
+                hasVideo: true,
                 body: `
                     <ul>
                         <li>Created a simulation in C# and Unity.</li>
@@ -815,10 +862,11 @@
                 `
             },
 
-            // Experience
+            // Experience (hasVideo: false)
             'conceptromec': {
                 title: 'Conceptromec inc.',
                 subtitle: '2025 · Professional Experience',
+                hasVideo: false,
                 body: `
                     <ul>
                         <li>Programmed an Allen-Bradley PLC to control a Fanuc robot and pneumatic valves.</li>
@@ -831,6 +879,7 @@
             'fournier': {
                 title: 'Fournier Industries inc.',
                 subtitle: '2025 · Professional Experience',
+                hasVideo: false,
                 body: `
                     <ul>
                         <li>Programmed a Beckhoff PLC and FANUC robots (welding and laser).</li>
@@ -844,6 +893,7 @@
             'ge': {
                 title: 'GE Bromont',
                 subtitle: '2024 · Professional Experience',
+                hasVideo: false,
                 body: `
                     <ul>
                         <li>Automated file transfers between FANUC robots and database using C#.</li>
@@ -855,6 +905,7 @@
             'siemens': {
                 title: 'Siemens Drummondville',
                 subtitle: '2023 · Professional Experience',
+                hasVideo: false,
                 body: `
                     <ul>
                         <li>Improved the factory using 5S and Lean methods.</li>
@@ -870,6 +921,7 @@
         const modalTitle = document.getElementById("modal-title");
         const modalSubtitle = document.getElementById("modal-subtitle");
         const modalBody = document.getElementById("modal-body");
+        const modalVideoContainer = document.getElementById("modal-video-container");
 
         function openModal(id) {
             const data = contentData[id];
@@ -878,6 +930,13 @@
                 modalSubtitle.textContent = data.subtitle;
                 modalBody.innerHTML = data.body;
                 
+                // Show video placeholder only if data.hasVideo is true (Academic Projects)
+                if (data.hasVideo) {
+                    modalVideoContainer.style.display = 'block';
+                } else {
+                    modalVideoContainer.style.display = 'none';
+                }
+
                 modal.style.display = "flex"; // Show modal
                 document.body.style.overflow = "hidden"; // Prevent background scrolling
             }
@@ -918,5 +977,3 @@
     </script>
 </body>
 </html>
-
-

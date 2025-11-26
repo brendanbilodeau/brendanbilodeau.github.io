@@ -415,6 +415,30 @@
         .modal-body li {
             margin-bottom: 10px;
         }
+        
+        /* Style for the external link button in Modal */
+        .external-link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #cc0000; /* YouTube Red-ish */
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .external-link-btn:hover {
+            background-color: #a80000;
+        }
+        
+        .external-link-btn i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
@@ -752,16 +776,11 @@
                 </video>
             </div>
 
-            <!-- YouTube Video Container (Added for Evolution Simulator) -->
-            <div id="modal-youtube-container" style="display:none; margin-bottom: 25px; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px;">
-                <iframe 
-                    id="modal-youtube-player"
-                    src="" 
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
+            <!-- External Link Button Container -->
+            <div id="modal-link-container" style="display:none; margin-bottom: 25px;">
+                <a id="modal-external-link" href="#" target="_blank" class="external-link-btn">
+                    <i class="fab fa-youtube"></i> Watch Video
+                </a>
             </div>
 
             <div id="modal-body" class="modal-body">
@@ -841,7 +860,10 @@
             'evolution': {
                 title: 'Evolution Simulator',
                 subtitle: '2022 · Expo-Science Finalist',
-                iframeUrl: 'https://www.youtube.com/watch?v=I8OgsXNWyOM&list=LL&index=86&t=4s', 
+                
+                // IMPORTANT: Replace this link with your real video link
+                link: 'https://youtu.be/I8OgsXNWyOM?si=Fyxl17pcGcg0ZTPs', 
+                
                 body: `
                     <ul>
                         <li>Created a simulation in C# and Unity.</li>
@@ -911,44 +933,45 @@
         const modalSubtitle = document.getElementById("modal-subtitle");
         const modalBody = document.getElementById("modal-body");
         
+        // Local Video Elements
         const modalVideoContainer = document.getElementById("modal-video-container");
         const modalVideoPlayer = document.getElementById("modal-video-player");
         const modalVideoSource = document.getElementById("modal-video-source");
 
-        const modalYoutubeContainer = document.getElementById("modal-youtube-container");
-        const modalYoutubePlayer = document.getElementById("modal-youtube-player");
+        // External Link Elements
+        const modalLinkContainer = document.getElementById("modal-link-container");
+        const modalExternalLink = document.getElementById("modal-external-link");
 
         function openModal(id) {
             const data = contentData[id];
             if(data) {
-                // Remplir les textes
+                // Set Text Content
                 modalTitle.textContent = data.title;
                 modalSubtitle.textContent = data.subtitle;
                 modalBody.innerHTML = data.body;
                 
-                // Réinitialiser les lecteurs (Cacher tout)
+                // Reset Video & Link Areas
                 modalVideoContainer.style.display = 'none';
                 modalVideoPlayer.pause();
                 modalVideoSource.src = "";
                 
-                modalYoutubeContainer.style.display = 'none';
-                modalYoutubePlayer.src = "";
+                modalLinkContainer.style.display = 'none';
+                modalExternalLink.href = "#";
 
-                // --- LOGIQUE MISE À JOUR ---
-                
-                // Cas 1 : URL complète pour iframe (YouTube, VideoExt, etc.)
-                if (data.iframeUrl) {
-                    modalYoutubeContainer.style.display = 'block';
-                    modalYoutubePlayer.src = data.iframeUrl; 
+                // Logic to display correct media type
+                if (data.link) {
+                    // It's an external link
+                    modalLinkContainer.style.display = 'block';
+                    modalExternalLink.href = data.link;
                 } 
-                // Cas 2 : Vidéo locale (MP4)
                 else if (data.video) {
+                    // It's a local MP4 file
                     modalVideoContainer.style.display = 'block';
                     modalVideoSource.src = data.video; 
                     modalVideoPlayer.load(); 
                 }
 
-                // Afficher le modal
+                // Show Modal
                 modal.style.display = "flex"; 
                 document.body.style.overflow = "hidden"; 
             }
@@ -958,12 +981,9 @@
             modal.style.display = "none";
             document.body.style.overflow = "auto";
             
-            // Arrêter la vidéo locale
+            // Stop Local Video
             modalVideoPlayer.pause();
             modalVideoSource.src = "";
-            
-            // Arrêter l'iframe (YouTube/Autre) en vidant la source
-            modalYoutubePlayer.src = "";
         }
 
         // 3. Active Link Highlight on Scroll
@@ -989,8 +1009,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-

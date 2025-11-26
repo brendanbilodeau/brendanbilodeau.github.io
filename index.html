@@ -841,9 +841,7 @@
             'evolution': {
                 title: 'Evolution Simulator',
                 subtitle: '2022 · Expo-Science Finalist',
-                // IMPORTANT: Replace the ID below with the actual YouTube Video ID from videoext.com or YouTube
-                // Example: if link is https://www.youtube.com/watch?v=dQw4w9WgXcQ, put 'dQw4w9WgXcQ'
-                youtubeId: 'https://youtu.be/I8OgsXNWyOM?si=rrDY22N2QZhaBVnu', 
+                iframeUrl: 'https://youtu.be/I8OgsXNWyOM?si=1Lns2axW_XNb1g26', 
                 body: `
                     <ul>
                         <li>Created a simulation in C# and Unity.</li>
@@ -913,24 +911,22 @@
         const modalSubtitle = document.getElementById("modal-subtitle");
         const modalBody = document.getElementById("modal-body");
         
-        // Local Video Elements
         const modalVideoContainer = document.getElementById("modal-video-container");
         const modalVideoPlayer = document.getElementById("modal-video-player");
         const modalVideoSource = document.getElementById("modal-video-source");
 
-        // YouTube Video Elements
         const modalYoutubeContainer = document.getElementById("modal-youtube-container");
         const modalYoutubePlayer = document.getElementById("modal-youtube-player");
 
         function openModal(id) {
             const data = contentData[id];
             if(data) {
-                // Set Text Content
+                // Remplir les textes
                 modalTitle.textContent = data.title;
                 modalSubtitle.textContent = data.subtitle;
                 modalBody.innerHTML = data.body;
                 
-                // Reset Players
+                // Réinitialiser les lecteurs (Cacher tout)
                 modalVideoContainer.style.display = 'none';
                 modalVideoPlayer.pause();
                 modalVideoSource.src = "";
@@ -938,20 +934,21 @@
                 modalYoutubeContainer.style.display = 'none';
                 modalYoutubePlayer.src = "";
 
-                // Logic to display correct video type
-                if (data.youtubeId) {
-                    // It's a YouTube video
+                // --- LOGIQUE MISE À JOUR ---
+                
+                // Cas 1 : URL complète pour iframe (YouTube, VideoExt, etc.)
+                if (data.iframeUrl) {
                     modalYoutubeContainer.style.display = 'block';
-                    modalYoutubePlayer.src = "https://www.youtube.com/embed/" + data.youtubeId;
+                    modalYoutubePlayer.src = data.iframeUrl; 
                 } 
+                // Cas 2 : Vidéo locale (MP4)
                 else if (data.video) {
-                    // It's a local MP4 file
                     modalVideoContainer.style.display = 'block';
                     modalVideoSource.src = data.video; 
                     modalVideoPlayer.load(); 
                 }
 
-                // Show Modal
+                // Afficher le modal
                 modal.style.display = "flex"; 
                 document.body.style.overflow = "hidden"; 
             }
@@ -961,11 +958,11 @@
             modal.style.display = "none";
             document.body.style.overflow = "auto";
             
-            // Stop Local Video
+            // Arrêter la vidéo locale
             modalVideoPlayer.pause();
             modalVideoSource.src = "";
             
-            // Stop YouTube Video (by resetting src)
+            // Arrêter l'iframe (YouTube/Autre) en vidant la source
             modalYoutubePlayer.src = "";
         }
 
@@ -992,6 +989,7 @@
     </script>
 </body>
 </html>
+
 
 
 

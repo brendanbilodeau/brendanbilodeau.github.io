@@ -765,14 +765,13 @@
                 <span id="modal-subtitle" class="modal-subtitle">Subtitle</span>
             </div>
             
-            <!-- Video Container (Visible only for Academic Projects) -->
-            <div id="modal-video-container" style="display:none;">
-                <div class="video-placeholder">
-                   <div>
-                       <i class="fas fa-play-circle"></i><br>
-                       <span>Video Placeholder</span>
-                   </div>
-                </div>
+            <!-- Video Container -->
+            <div id="modal-video-container" style="display:none; margin-bottom: 25px;">
+                <!-- The source will be set by JavaScript dynamically -->
+                <video id="modal-video-player" width="100%" controls style="border-radius: 8px; border: 1px solid #ddd;">
+                    <source id="modal-video-source" src="" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
 
             <div id="modal-body" class="modal-body">
@@ -789,7 +788,7 @@
             'capstone': {
                 title: 'Capstone Project (Research Firm)',
                 subtitle: '2025 · Biological Grain Crossbreeding',
-                hasVideo: true,
+                hasVideo: false,
                 body: `
                     <ul>
                         <li>Developed a Seed counter and distributor system.</li>
@@ -801,7 +800,7 @@
             'rubik': {
                 title: "Rubik's Cube Solver",
                 subtitle: '2024 · Personal Project',
-                hasVideo: true,
+                video: 'rubik.mp4', 
                 body: `
                     <ul>
                         <li>Base structure fully designed and 3D printed.</li>
@@ -814,7 +813,7 @@
             'racecar': {
                 title: 'Autonomous Racecar',
                 subtitle: '2024 · Academic Project',
-                hasVideo: true,
+                video: 'racecar.mp4', 
                 body: `
                     <ul>
                         <li>Used ROS 2, Linux, Arduino, and Raspberry Pi for communication and control.</li>
@@ -826,7 +825,7 @@
             'caddy': {
                 title: 'Workshop Caddy',
                 subtitle: '2023 · Academic Project',
-                hasVideo: true,
+                video: 'robus.mp4', 
                 body: `
                     <ul>
                         <li>Embedded programming with Arduino Mega.</li>
@@ -839,7 +838,7 @@
             'autoline': {
                 title: 'Automation Line',
                 subtitle: '2023 · Academic Project',
-                hasVideo: true,
+                hasVideo: false,
                 body: `
                     <ul>
                         <li>Simulated box packaging process with IKEA-style parts.</li>
@@ -852,7 +851,7 @@
             'evolution': {
                 title: 'Evolution Simulator',
                 subtitle: '2022 · Expo-Science Finalist',
-                hasVideo: true,
+                hasVideo: false,
                 body: `
                     <ul>
                         <li>Created a simulation in C# and Unity.</li>
@@ -922,6 +921,8 @@
         const modalSubtitle = document.getElementById("modal-subtitle");
         const modalBody = document.getElementById("modal-body");
         const modalVideoContainer = document.getElementById("modal-video-container");
+        const modalVideoPlayer = document.getElementById("modal-video-player");
+        const modalVideoSource = document.getElementById("modal-video-source");
 
         function openModal(id) {
             const data = contentData[id];
@@ -930,28 +931,27 @@
                 modalSubtitle.textContent = data.subtitle;
                 modalBody.innerHTML = data.body;
                 
-                // Show video placeholder only if data.hasVideo is true (Academic Projects)
-                if (data.hasVideo) {
+                // Check if this project has a video file defined
+                if (data.video) {
                     modalVideoContainer.style.display = 'block';
+                    modalVideoSource.src = data.video; // Set the video file
+                    modalVideoPlayer.load(); // Load the new video
                 } else {
                     modalVideoContainer.style.display = 'none';
+                    modalVideoPlayer.pause(); // Stop any playing video
+                    modalVideoSource.src = "";
                 }
 
-                modal.style.display = "flex"; // Show modal
-                document.body.style.overflow = "hidden"; // Prevent background scrolling
+                modal.style.display = "flex"; 
+                document.body.style.overflow = "hidden"; 
             }
         }
 
         function closeModal() {
             modal.style.display = "none";
-            document.body.style.overflow = "auto"; // Restore scrolling
-        }
-
-        // Close modal if clicking outside the content box
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
-            }
+            document.body.style.overflow = "auto";
+            modalVideoPlayer.pause(); // Stop video when closing modal
+            modalVideoSource.src = ""; // Reset source
         }
 
         // 3. Active Link Highlight on Scroll
@@ -977,4 +977,5 @@
     </script>
 </body>
 </html>
+
 
